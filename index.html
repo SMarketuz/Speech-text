@@ -8,17 +8,61 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>Document</title>
+    <style>
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        #text {
+            padding-right: 100px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: 2px solid blue;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        #btn {
+            padding: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background: aqua;
+            color: red;
+            border-left: none;
+        }
+        #form {
+            display: flex;
+        }
+        .massage h3 {
+            color: aqua;
+            font-size: 30px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     
 
-    <input type="text" id="text">
-    <button onclick="play()">click me</button>
-
+    <form id="form">
+        <input type="text" id="text" placeholder="entering text" name="inp">
+        <button onclick="play()" id="btn" type="submit">click me</button>
+    </form>
+    <div class="massage">
+        <h3></h3>
+    </div>
 
 
     <script> 
-       const speech = new SpeechSynthesisUtterance()
+        const speech = new SpeechSynthesisUtterance()
+        let form = document.getElementById('form')
+        let btn = document.getElementById('btn')
+        let massage = document.querySelector('.massage')
+
 
        function play() {
         const text = document.getElementById('text').value
@@ -27,6 +71,24 @@
         speech.lang = 'en'
         window.speechSynthesis.speak(speech)
        }
+
+       form.addEventListener('click', e => {
+        e.preventDefault()
+        let value = form.inp.value
+        
+        massage.innerHTML += `
+        <div class="massage">
+            <h3>${value}🤣🤣🤣</h3>
+        </div>  
+        `
+        setTimeout(()=> {
+            massage.innerHTML = ''
+        },4000)
+
+       })
+
+       
+
     </script>
 
 
